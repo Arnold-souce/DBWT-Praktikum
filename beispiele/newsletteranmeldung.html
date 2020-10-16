@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>NewsletterAnmeldung</title>
+</head>
+<body>
+<!-- Formular -->
+<div class="container formular">
+    <p>Anmeldung</p>
+    <form action="beispiele/formdata.html" method="post">
+        <div class="form-group">
+            Anrede<br>
+            <input type="radio" id="frau" name="anrede" value="frau">
+            <label for="frau">Frau</label><br>
+            <input type="radio" id="herr" name="anrede" value="herr">
+            <label for="herr">Herr</label><br><br>
+        </div>
+        <div class="form-group">
+            <label for="vorname">Vorname*</label><br>
+            <input type="text" class="form-control" id="vorname"  name="vorname" size="40" placeholder="Bitte geben Sie ihren Vornamen ein" required>
+        </div>
+        <div class="form-group">
+            <label for="nachname">Nachname*</label><br>
+            <input type="text" class="form-control" id="nachname"  name="nachname" size="40" placeholder="Bitte geben Sie ihren Nachnamen ein" required>
+        </div>
+        <div class="form-group">
+            <label for="email">E-Mail*</label><br>
+            <input type="text" class="form-control" id="email"  name="email" size="40" placeholder="Bitte geben Sie ihre E-Mail ein" required>
+        </div>
+        <div class="form-group">
+            <label for="intervall">Benachrichtigungsintervall</label><br>
+            <select class="form-control" id="intervall" name="intervall">
+                <option>Tag</option>
+                <option>Woche</option>
+                <option>Monat</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <input type="checkbox" class="form-control" id="datenschutz" required>
+            <label for="datenschutz">Datenschutzhinweise gelesen</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Abschicken</button><br>
+        <p>*)Eingaben sind Pflicht</p>
+    </form>
+</div>
+</body>
+</html>
