@@ -44,8 +44,8 @@
     grid-template-columns: 20% 60% 20%;
 }
 #img2{
-    width: 840px;
-    height: 280px;
+    width: 100%;
+    height: auto;
     padding-bottom: 15px;
     padding-top: 15px;
 
@@ -89,7 +89,8 @@
 }
 #textarea1{
     background-color: aquamarine;
-
+    width: 100%;
+    height: auto;
 
 }
 #text5{
@@ -132,6 +133,11 @@
 .link{
     color: aqua;
 }
-.list1 ul{
-    text-align: right;
+.list1 {
+    text-align-all: right;
+}
+
+.placeholder {
+    size: 10px;
+
 }
