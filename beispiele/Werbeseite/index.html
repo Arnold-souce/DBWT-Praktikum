@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<!--
+- Praktikum DBWT. Autoren:
+- Arnold, Kamdem, 3192203
+- Tobias, Liermann, 3126774
+-Elysee, Tchinda, 3209889
+-->
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title> Ihre E-Mensa</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="E-Mensa.css" rel="stylesheet">
+</head>
+
+<body id="ganz">
+<div id="beginn">
+    <div id="logo">
+        E-Mensa Logo
+    </div>
+    <div>
+        <div id="beginn1">
+            <div>
+                <a class="link" href="#ankündigung">Ankündigung</a>
+            </div>
+            <div>
+                <a class="link" href="#speisen">Speisen</a>
+            </div>
+            <div>
+                <a class="link" href="#zahlen">Zahlen</a>
+            </div>
+            <div>
+                <a class="link" href="#kontakt">Kontakt</a>
+            </div>
+            <div>
+                <a class="link" href=#wichtig>Wichtig für uns</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div id="reception">
+    <div></div>
+    <div id="mittel">
+        <img id= "img2" src="wilkommwn.jpeg" alt="Wilkommen-Bild">
+        <div id ="ankündigung">
+            <h2 id = "text1"> Bald gibt es Essen auch Online ;)</h2>
+
+            <label for="textarea1"></label><textarea id="textarea1" name="text" rows="8" cols="84">
+            Hier sollen wir noch dieser Text reinschreiben.
+            Das konnte ich nur schwer lesen
+</textarea>
+        </div>
+        <div id ="speisen">
+            <h2 id = "text2" > Köstlichtkeiten,die Sie erwarten</h2>
+        </div>
+
+        <table class="table table-bordered" id="table1">
+            <thead>
+            <tr>
+                <th colspan="3"></th>
+                <th scope="col">Preis Intern</th>
+                <th scope="col">Preis Extern</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td colspan="3">Rindfleisch mit Bambus, Kaiserschoten und rotem Praprika, dazu Mie Nudeln</td>
+                <td>3,50</td>
+                <td>6,20</td>
+
+            </tr>
+            <tr>
+                <td colspan="3">Spinatrioto mit kleinen Samosateigecken und gemischeter Salat</td>
+                <td>3,50</td>
+                <td>6,20</td>
+
+            </tr>
+
+            </tbody>
+
+            <tr>
+                <td colspan="3" >...</td>
+                <td >...</td>
+                <td >...</td>
+            </tr>
+
+        </table>
+        <div id="zahlen">
+            <h2 id = "text4" > E-Mensa in Zahlen</h2></div>
+        <div id="beginn2">
+            <div>
+                <h5 >X Besuche</h5>
+            </div>
+            <div>
+                <h5 id="text5"> Y Anmeldungen zum Newsletter</h5>
+            </div>
+            <div>
+                <h5 id ="text6"> Z Speisen</h5>
+            </div>
+        </div>
+
+        <div id ="kontakt">
+            <h2 id = "text3"> Interesse geweckt? wir informieren Sie!</h2></div>
+
+        <form>
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <label for="validationDefault01">Ihre Name</label>
+                    <input type="text" class="form-control" id="validationDefault01" value="Vorname" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="validationDefault02">Ihre Email</label>
+                    <input type="text" class="form-control" id="validationDefault02" value="Email" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    Newsletter bitte in:
+                    <label>
+                        <select class="form-control form-control-lg">
+
+                            <option>Deutsch</option>
+                            <option>Spanisch</option>
+                            <option>Französisch</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+                    <label class="form-check-label" for="invalidCheck2">
+                        Den Datenschutzbestimmungen stimme ich zu
+                    </label>
+                </div>
+                <div class="col-md-2 mb-3">
+
+                </div>
+                <div class="col-md-4 mb-3">
+                    <button class="btn btn-primary" type="submit" disabled>Zum Newsletter anmelden</button>
+                </div>
+            </div>
+
+        </form>
+
+
+        <div id ="wichtig">
+            <h2 id = "text7"> Das ist uns wichtig</h2>
+
+        </div>
+
+
+        <ul id="list1">
+            <li>Beste frische saisonale Zutaten</li>
+            <li>Ausgewogene abwechslungsreiche Gerichte</li>
+            <li>Sauberkeit</li>
+        </ul>
+
+
+
+
+        <h2 id = "text8"> Wir freuen uns auf Ihren Besuch</h2>
+
+
+
+
+
+
+        <div></div>
+    </div>
+</div>
+
+<footer id="foot">
+    <div id ="foot1">
+        <div id="foot2">
+            &copy;E-Mensa GmbH
+        </div>
+        <div id="foot3">
+            <h6 >Arnold kamdem,
+                Elysee Tchinda,
+                Tobi</h6>
+        </div>
+        <div id="foot4">
+            <a class="link" href="">Impressum</a>
+        </div>
+    </div>
+
+</footer>
+
+</body>
+</html>
