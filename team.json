@@ -1,0 +1,21 @@
+{
+	"team" : "INF_F",
+	"mitglieder":
+	[
+	  {
+		"matrikelnummer": 3126774,
+		"name": "Tobias Liermann",
+		"ilias" : "tl3581s"
+	  },
+	  {
+		"matrikelnummer": ,
+		"name": "",
+		"ilias" : ""
+	  }
+	  {
+		"matrikelnummer": ,
+		"name": "",
+		"ilias" : ""
+	  }
+	]
+}
