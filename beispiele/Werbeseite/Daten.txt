@@ -1,2 +1,4 @@
-name;ELYSEE
-email;name@thrashmail.org
+Tobias;tobiasliermann@gmx.de;Deutsch;aktiv
+Peter;peterklien@gmail.com;Spanisch;aktiv
+Tina;allerbestetina@gmail.com;Deutsch;aktiv
+Albert;baertigeralbert@gmx.de;Deutsch;aktiv

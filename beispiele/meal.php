@@ -1,16 +1,7 @@
 <?php
 const GET_PARAM_MIN_STARS = 'search_min_stars';
 const GET_PARAM_SEARCH_TEXT = 'search_text';
-const GET_PARAM_SHOW_DESCRIPTION= 'show_description';
-const GET_PARAM_SPRACHE = 'sprache';
-
-$sprache=$_GET['sprache'];
-
-if(!isset($_GET[GET_PARAM_SPRACHE])) {
-    $sprache = "de";
-}
-
-
+const GET_PARAM_SHOW_DESCRIPTION = 'show_description';
 
 /**
  * Liste aller möglichen Allergene.
@@ -20,8 +11,8 @@ $allergens = array(
     12 => 'Krebstiere',
     13 => 'Eier',
     14 => 'Fisch',
-    17 => 'Milch' )
-;
+    17 => 'Milch'
+);
 
 $meal = [ // Kurzschreibweise für ein Array (entspricht = array())
     'name' => 'Süßkartoffeltaschen mit Frischkäse und Kräutern gefüllt',
@@ -47,18 +38,6 @@ $ratings = [
         'stars' => 3 ]
 ];
 
-
-
- //Hier sind arrays für Übersetzung erstellt
-$gericht=['en' => 'Meal', 'de'=>'Gericht'];
-$description_btn=['en' => 'Description', 'de'=>"Bescreibung"];
-$no_description_btn=['en' => 'Hide_Description', 'de'=>'Beschreibung_ausblenden'];
-$allergene_titel =['en' => 'The allergens are', 'de'=>'Die allergene sind'];
-$bewertung_titel = ['en' => 'Ratings (Total:', 'de'=>'Bewertungen (Insgesamt:'];
-$senden_btn=['en' => 'Send', 'de'=>'Senden'];
-$preise_titel=['en' => 'Prices :', 'de'=>'Preise :'];
-
-
 $showRatings = [];
 if (!empty($_GET[GET_PARAM_SEARCH_TEXT])) {
     $searchTerm = $_GET[GET_PARAM_SEARCH_TEXT];
@@ -67,7 +46,7 @@ if (!empty($_GET[GET_PARAM_SEARCH_TEXT])) {
             $showRatings[] = $rating;
         }
     }
-} else if (!empty($_GET[GET_PARAM_MIN_STARS])) {
+} elseif (!empty($_GET[GET_PARAM_MIN_STARS])) {
     $minStars = $_GET[GET_PARAM_MIN_STARS];
     foreach ($ratings as $rating) {
         if ($rating['stars'] >= $minStars) {
@@ -79,11 +58,11 @@ if (!empty($_GET[GET_PARAM_SEARCH_TEXT])) {
 }
 
 function calcMeanStars($ratings) : float { // : float gibt an, dass der Rückgabewert vom Typ "float" ist
-    $sum = 0; // nicht sum=1 und i hat kein Nutzen
-
+    $sum = 0;
+    $i = 0;
     foreach ($ratings as $rating) {
         $sum += $rating['stars'];
-
+        $i++;
     }
     return $sum / count($ratings);
 }
@@ -91,89 +70,63 @@ function calcMeanStars($ratings) : float { // : float gibt an, dass der Rückgab
 ?>
 <!DOCTYPE html>
 <html lang="de">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Gericht: <?php echo $meal['name']; ?></title>
-    <style type="text/css">
-        * {
-            font-family: Arial, serif;
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Gericht: <?php echo $meal['name']; ?></title>
+        <style type="text/css">
+            * {
+                font-family: Arial, serif;
+            }
+            .rating {
+                color: darkgray;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Gericht: <?php echo $meal['name']; ?></h1>
+        <p><?php
+            if(!empty($_GET[GET_PARAM_SHOW_DESCRIPTION]) && $_GET[GET_PARAM_SHOW_DESCRIPTION]) {
+                echo $meal['description'];
+            }
+            ?></p>
+        <h2>Allergene:</h2>
+        <?php echo "<ul>";
+            foreach($meal['allergens'] as $allergene){
+                        echo "<li>$allergens[$allergene]</li>";
+                        }
+            echo "</ul>";
+            ?>
+        <h1>Bewertungen (Insgesamt: <?php echo calcMeanStars($ratings); ?>)</h1>
+        <form method="get">
+            <label for="search_text">Filter:</label>
+            <input id="search_text" type="text" name="search_text" placeholder="<?php
+            if (!empty($_GET[GET_PARAM_SEARCH_TEXT])) {
+                $searchTerm = $_GET[GET_PARAM_SEARCH_TEXT];
+                echo $searchTerm;
+            }
+            ?>">
+            <label for="show_description">Beschreibung anzeigen?</label>
+            <input id="show_description" type="checkbox" name="show_description">
+            <input type="submit" value="Suchen">
+        </form>
+        <table class="rating">
+            <thead>
+            <tr>
+                <td>Text</td>
+                <td>Sterne</td>
+                <td>Autor</td>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+        foreach ($showRatings as $rating) {
+            echo "<tr><td class='rating_text'>{$rating['text']}</td>
+                      <td class='rating_stars'>{$rating['stars']}</td>
+                      <td class='rating-author'>{$rating['author']}</td>
+                  </tr>";
         }
-        .rating {
-            color: darkgray;
-        }
-    </style>
-</head>
-<body>
-<h1>  <?php echo $gericht["$sprache"];
-            echo ":";
-            echo $meal['name']; ?></h1>
-<form method="get">
-    <input type="submit" value=<?php echo $description_btn["$sprache"] ?> name="show_description">
-</form>
-<p><?php
-        if(isset($_GET[GET_PARAM_SHOW_DESCRIPTION]))
-             echo $meal['description'];
-    ?></p>
-<form method="get">
-    <input type="submit" value=<?php echo $no_description_btn["$sprache"] ?> name="description_ausblenden">
-</form>
-<p><?php
-        if(isset($_GET['description_ausblenden']))
-              echo "";
-?></p>
-
-
-
-<!--Allergene ausgeben*/-->
-<?php
-$allergene_list="<ul>";
-    foreach ($meal['allergens'] as $item){
-    $allergene_list.="<li>$allergens[$item]</li>";
-    }
-    $allergene_list.="</ul>";
-echo $allergene_titel["$sprache"];
-echo ": <br> $allergene_list";
-?>
-<!--Ende-->
-
-<h2><?php echo $preise_titel["$sprache"] ?></h2>
-Intern: <?php echo number_format( $meal['price_intern'],2); ?> &euro; <br>
-Extern: <?php echo number_format( $meal['price_extern'],2); ?> &euro; <br>
-
-
-<h1><?php echo $bewertung_titel["$sprache"];
-          echo calcMeanStars($ratings); ?>)</h1>
-<form method="get">
-    <label for="search_text">Filter:</label>
-    <input id="search_text" type="text" name="search_text" value="<?php echo $_GET[GET_PARAM_SEARCH_TEXT]; ?>">
-    <input type="submit" value="<?php echo $senden_btn["$sprache"]; ?>" >
-</form>
-<table class="rating">
-    <thead>
-    <tr>
-        <td>Autor</td>
-        <td>Text</td>
-        <td>Sterne</td>
-    </tr>
-    </thead>
-    <tbody>
-    <?php
-    foreach ($showRatings as $rating) {
-        echo "<tr>
-                <td class='rating_author'>{$rating['author']}</td>
-                <td class='rating_text'>{$rating['text']}</td>
-                <td class='rating_stars'>{$rating['stars']}</td>
-              </tr>";
-    }
-
-    ?>
-    </tbody>
-</table>
-
-<?php
-echo "<a href='meal.php?sprache=en'>Englisch</a><br>";
-echo "<a href='meal.php?sprache=de'>Deutsch</a>";
-?>
-
-</body>
+        ?>
+            </tbody>
+        </table>
+    </body>
 </html>
