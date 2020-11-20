@@ -1,4 +1,3 @@
 <?php
-echo "Hallo";
-echo phpversion();
-?>
+echo "Erstes PHP Skript <br>";
+phpinfo();

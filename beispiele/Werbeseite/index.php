@@ -117,13 +117,32 @@ nicht' height ='100' width='150'> " ?></td>
             <h2 id = "text4" > E-Mensa in Zahlen</h2></div>
         <div id="beginn2">
             <div>
-                <h5 > <input type="text" class="form-control placeholder" id="placeholder1" value="X" placeholder="X" readonly> Besuche</h5>
+                <h5 > <input type="text" class="form-control placeholder" id="placeholder1" value="<?php
+
+                    include("counter.php");
+                    echo $zahl;
+
+                    ?>" placeholder="X" readonly> Besuche</h5>
             </div>
             <div>
-                <h5 id="text5">  <input type="text" class="form-control placeholder" id="placeholder2" value="Y" placeholder="Y" readonly> Anmeldungen zum Newsletter</h5>
+                <h5 id="text5">  <input type="text" class="form-control placeholder" id="placeholder2" value="<?php
+                    $file1 = fopen('Daten.txt', 'r+');
+                    if (!$file1) {
+                        die('Öffnen fehlgeschlagen');
+
+                    }
+                    $anmeldungen = 0;
+                    while(!feof($file1)){
+                        fgets($file1,4096);
+                        $anmeldungen += 1;
+                    }
+
+                    fclose($file);
+                    echo ($anmeldungen-1);
+                    ?>" placeholder="Y" readonly> Anmeldungen zum Newsletter</h5>
             </div>
             <div>
-                <h5 id ="text6">  <input type="text" class="form-control placeholder" id="placeholder3" value="Z" placeholder="Z" readonly> Speisen</h5>
+                <h5 id ="text6">  <input type="text" class="form-control placeholder" id="placeholder3" value="<?php echo ((count($array_gerichte))/4) ?>" placeholder="Z" readonly> Speisen</h5>
             </div>
         </div>
 
@@ -146,7 +165,7 @@ nicht' height ='100' width='150'> " ?></td>
                 <div class="col-md-4 mb-3">
                     Newsletter bitte in:
                     <label>
-                        <select class="form-control form-control-lg">
+                        <select name= "sprache" class="form-control form-control-lg">
 
                             <option>Deutsch</option>
                             <option>Spanisch</option>
@@ -158,7 +177,7 @@ nicht' height ='100' width='150'> " ?></td>
 
             <div class="form-row">
                 <div class="col-md-6 mb-3">
-                    <input name = "check1" class="form-check-input" type="checkbox" value="aktiv" id="invalidCheck2">
+                    <input name = "datenschutz" class="form-check-input" type="checkbox" value="aktiv" id="invalidCheck2">
                     <label class="form-check-label" for="invalidCheck2">
                         Den Datenschutzbestimmungen stimme ich zu
                     </label>
@@ -184,9 +203,9 @@ nicht' height ='100' width='150'> " ?></td>
                 $errors['email'] = 'Sie müssen Ihre Adresse geben.';
                 echo '<div class="alert alert-danger" role="alert">   '.$errors['email'].' </div>';
             }
-            elseif (!($_POST['check1'])){
-                $errors['check1']= 'Sie mÜssen erst bestädigen';
-                echo '<div class="alert alert-danger" role="alert">   '.$errors['check1'].' </div>';
+            elseif (!($_POST['datenschutz'])){
+                $errors['datenschutz']= 'Sie mÜssen erst bestädigen';
+                echo '<div class="alert alert-danger" role="alert">   '.$errors['datenschutz'].' </div>';
 
             }
             $email = $_POST['email'] ?? NULL;
@@ -201,22 +220,23 @@ nicht' height ='100' width='150'> " ?></td>
                 $errors['email_check2'] = 'Keine Trashmails';
                 echo '<div class="alert alert-danger" role="alert">   '.$errors['email_check2'].' </div>';
             }
-            elseif($errors['name'] == '' && $errors['email'] == '' && ($_POST['check1']) && $errors['email_check']==''){
+            elseif($errors['name'] == '' && $errors['email'] == '' && ($_POST['datenschutz']) && $errors['email_check']==''){
                 $errors['keine'] = 'Ihre Daten wurden erfolgreich gespeichert';
                 echo '<div class="alert alert-success" role="alert" ><strong>Success!</strong> '.$errors['keine'].'   </div>';
                 $Speicherung = [
                     'name' => $_POST['name'],
-                    'email' => $_POST['email']
+                    'email' => $_POST['email'],
+                    'sprache' => $_POST['sprache'],
+                    'datenschutz' => $_POST['datenschutz']
                 ];
-                $file1 = fopen('Daten.txt', 'w+');
+                $file1 = fopen('Daten.txt', 'a+');
                 if (!$file1) {
                     die('Öffnen fehlgeschlagen');
 
                 }
-                foreach($Speicherung as $key => $txt){
-                    $line = "$key;$txt\n";
+                    $line = implode(";",$Speicherung)."\n";
                     fwrite($file1, $line);
-                }
+
                 fclose($file);
             }
             ?>
