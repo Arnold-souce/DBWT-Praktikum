@@ -1,0 +1,142 @@
+#beginn {
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+    border-bottom: 2px solid black;
+    padding-bottom: 5px;
+    padding-top:5px;
+
+}
+#mittel
+{
+    margin-left: 3px;
+    max-width:100px;
+    min-width: 100%;
+}
+#beginn1 {
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    border-style: solid ;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-top: 5px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding: 5px;
+    margin: 2px;
+    text-align: center;
+    margin-left: 3px;
+
+}
+#beginn2 {
+    display: grid;
+    grid-template-columns: 35% 30% 35%;
+    margin-top: 30px;
+    margin-bottom: 30px
+
+
+}
+#foot{
+    border-top: 2px solid black;
+}
+#reception{
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+}
+#img2{
+    width: 100%;
+    height: auto;
+    padding-bottom: 15px;
+    padding-top: 15px;
+
+
+}
+#text1{
+    padding: 10px ;
+
+}
+#text2{
+    padding: 10px ;
+
+}
+#text3{
+    padding: 10px ;
+}
+#text4 {
+    padding: 10px ;
+}
+
+#ganz{
+    font-family: cursive;
+    color:black;
+    background-color:white;
+    background-image:url(Resto.jpg);
+    background-position :right top;
+    background-size: 250px 170px;
+    background-repeat: no-repeat;
+    border: solid black;
+    height: auto;
+    margin-left: 15px;
+    margin-right: 15px;
+
+}
+#logo{
+    border: solid black;
+    padding: 5px;
+    margin: 2px;
+    text-align: center;
+    background-color: aquamarine;
+}
+#textarea1{
+    background-color: aquamarine;
+    width: 100%;
+    height: auto;
+
+}
+#text5{
+    text-align: center;
+}
+#text6{
+    text-align: right;
+}
+#foot1{
+    display: grid;
+    grid-template-columns: 35% 30% 35%;
+    padding: 10px;
+}
+#foot2{
+    text-align: center;
+
+}
+#foot3{
+    text-align: center;
+    border-left:solid black;
+}
+#foot4{
+    text-align: center;
+    border-left:solid black;
+}
+#text7{
+    padding: 10px ;
+}
+#text8{
+    padding: 10px ;
+}
+#table1{
+
+    text-align: center;
+    padding-bottom: 25px;
+    padding-top: 25px;
+    border:1px solid black;
+
+}
+.link{
+    color: aqua;
+}
+.list1 {
+    text-align-all: right;
+}
+
+.placeholder {
+    size: 10px;
+
+}

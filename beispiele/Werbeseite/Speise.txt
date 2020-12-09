@@ -1,0 +1,16 @@
+Kartoffel mit Schwein
+3,50
+6,20
+img/Speise1.jpg
+Rindfleisch mit Bambus, Kaiserschoten und rotem Praprika, dazu Mie Nudeln
+3,50
+6,20
+img/Speise2.jpg
+Spinatrioto mit kleinen Samosateigecken und gemischeter Salat
+3,50
+6,20
+img/Speise3.jpg
+Hähnchen mit Pommes
+3,50
+6,20
+img/Speise4.jpg
