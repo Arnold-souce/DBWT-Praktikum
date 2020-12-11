@@ -83,7 +83,7 @@ if ($file = fopen("Daten.txt", "r")) {
         $gesInhalt = sortArrayByFields($gesInhalt,array('E-Mail' => SORT_ASC));
     }
     if(isset($_GET['filter']) && $_GET['filter'] != null) {
-        $suche = strtolower($_GET['filter']);
+        $suche = strtolower(htmlspecialchars($_GET['filter']));
         $stellen = [];
         $i = 0;
 
@@ -122,7 +122,6 @@ if ($file = fopen("Daten.txt", "r")) {
 
     fclose($file);
 }
-phpinfo();
 
 ?>
 

@@ -80,13 +80,12 @@ limit 5";
 
         if ($db->query($sql)){
 
-            echo "well don";
-        }
+                   }
         else {
             echo "du bist am Arsch ". $db->error;
         }
         $result = $db->query($sql);
-        echo '<table class="table table-bordered" id="table1">
+        $strtable = '<table class="table table-bordered" id="table1">
             <thead>
             <tr>
                 <th >Name</th>
@@ -99,6 +98,7 @@ limit 5";
             </thead>
             
 <tbody>';
+        echo htmlspecialchars_decode(htmlspecialchars($strtable));
 
         while ($row =mysqli_fetch_assoc($result)){
             echo'<tr>';
@@ -145,7 +145,28 @@ limit 5";
                     ?>" placeholder="Y" readonly> Anmeldungen zum Newsletter</h5>
             </div>
             <div>
-                <h5 id ="text6">  <input type="text" class="form-control placeholder" id="placeholder3" value="<?php echo ((count($array_gerichte))/4) ?>" placeholder="Z" readonly> Speisen</h5>
+                <h5 id ="text6">  <input type="text" class="form-control placeholder" id="placeholder3" value="<?php
+
+                    $db = new  mysqli("localhost","root","aachen123","emensawerbeseite");
+
+                    if ($db -> connect_error){
+                        echo "error";
+                        die ("Verbindung fehlgeschlagen: ".$db->connect_error);
+                    }
+
+                    $sql = "SELECT COUNT(*) as numgericht FROM `gericht`";
+
+
+                    if ($db->query($sql)){
+                    }
+                    else {
+                        echo "du bist am Arsch ". $db->error;
+                    }
+                    $result = $db->query($sql);
+                    while ($row =mysqli_fetch_assoc($result)) {
+                        echo $row['numgericht'];
+                    }
+                    ?>" placeholder="Z" readonly> Speisen</h5>
             </div>
         </div>
 
