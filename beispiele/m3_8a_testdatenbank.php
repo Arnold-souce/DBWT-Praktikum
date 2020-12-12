@@ -21,7 +21,7 @@
 <body>
 <?php
 
-$link = mysqli_connect("localhost","root","aachen123","emensawerbeseite");
+$link = mysqli_connect("localhost","root","1234","datenbank");
 
 if (!$link) {
     echo "Verbindung fehlgeschlagen: ", mysqli_connect_error();

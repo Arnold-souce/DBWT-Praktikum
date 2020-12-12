@@ -16,10 +16,6 @@
 <body id="ganz">
 
 
-
-
-
-
 <div id="beginn">
     <div id="logo">
         E-Mensa Logo
@@ -50,7 +46,7 @@
 
     <div></div>
     <div id="mittel">
-        <img id= "img2" src="wilkommwn.jpeg" alt="Wilkommen-Bild">
+        <img id= "img2" src="img\wilkommwn.jpeg" alt="Wilkommen-Bild">
         <div id ="ankündigung">
             <h2 id = "text1"> Bald gibt es Essen auch Online ;)</h2>
 
@@ -65,7 +61,7 @@
         <!-- ////////////////////////////////////////////////////////////////////////////-->
         <?php
 
-        $db = new  mysqli("localhost","root","aachen123","emensawerbeseite");
+        $db = new  mysqli("localhost","root","1234","datenbank");
 
         if ($db -> connect_error){
             echo "error";
@@ -80,9 +76,10 @@ limit 5";
 
         if ($db->query($sql)){
 
-                   }
+            echo "well done";
+        }
         else {
-            echo "du bist am Arsch ". $db->error;
+            echo "Hat nicht geklappt ". $db->error;
         }
         $result = $db->query($sql);
         $strtable = '<table class="table table-bordered" id="table1">
@@ -116,6 +113,11 @@ limit 5";
 
         ?>
 
+        <div>
+
+            Klicken Sie <a href="wunschgericht.php" > Hier  </a> um Ihr Wunschgericht zu melden<br><br><br>
+        </div>
+
         <div id="zahlen">
             <h2 id = "text4" > E-Mensa in Zahlen</h2></div>
         <div id="beginn2">
@@ -147,7 +149,7 @@ limit 5";
             <div>
                 <h5 id ="text6">  <input type="text" class="form-control placeholder" id="placeholder3" value="<?php
 
-                    $db = new  mysqli("localhost","root","aachen123","emensawerbeseite");
+                    $db = new  mysqli("localhost","root","1234","datenbank");
 
                     if ($db -> connect_error){
                         echo "error";
@@ -160,7 +162,7 @@ limit 5";
                     if ($db->query($sql)){
                     }
                     else {
-                        echo "du bist am Arsch ". $db->error;
+                        echo "Hat mit der DB nicht geklappt ". $db->error;
                     }
                     $result = $db->query($sql);
                     while ($row =mysqli_fetch_assoc($result)) {
@@ -189,11 +191,11 @@ limit 5";
                 <div class="col-md-4 mb-3">
                     Newsletter bitte in:
                     <label>
-                        <select class="form-control form-control-lg">
+                        <select class="form-control form-control-lg" value="sprache">
 
-                            <option>Deutsch</option>
-                            <option>Spanisch</option>
-                            <option>Französisch</option>
+                            <option name="sprachoption" value="Deutsch">Deutsch</option>
+                            <option name="sprachoption" value="Spanisch">Spanisch</option>
+                            <option name="sprachoption" value="Französisch">Französisch</option>
                         </select>
                     </label>
                 </div>
@@ -249,18 +251,27 @@ $errors['keine'] = 'Ihre Daten wurden erfolgreich gespeichert';
 echo '<div class="alert alert-success" role="alert" ><strong>Success!</strong> '.$errors['keine'].'   </div>';
     $Speicherung = [
         'name' => $_POST['name'],
-        'email' => $_POST['email']
+        'email' => $_POST['email'],
+        'sprache'=>$_POST['sprachoption']
     ];
     $file1 = fopen('Daten.txt', 'a+');
     if (!$file1) {
         die('Öffnen fehlgeschlagen');
 
     }
-    foreach($Speicherung as $key => $txt){
+
+
+      //Daten in nur einer Zeile gespeichert; Sprrache muss noch ausgewählt werden
+        $line=$Speicherung['name'].";".$Speicherung['email'].";".'Deustch'."aktiv\n";
+       fwrite($file1, $line);
+
+
+       //Mit dem unten kommentiertien Code waren die Bemutzerdaten in je 2 Zeilen gespeichert.
+   /* foreach($Speicherung as $key => $txt){
         $line = "$key;$txt\n";
         fwrite($file1, $line);
     }
-    fclose($file1);
+    fclose($file1);*/
 }
 ?>
         </form>
