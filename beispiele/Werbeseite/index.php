@@ -68,10 +68,16 @@
             die ("Verbindung fehlgeschlagen: ".$db->connect_error);
         }
 
-        $sql = "SELECT `gericht`.`name` as gname,`gericht`.`Preis_intern` as preis_intern,`gericht`.`Preis_extern` as preis_extern, ( a.`name`) as allergene_name,group_concat( a.`code`) as code FROM `gericht`
-LEFT JoIN `gericht_hat_allergen` on `gericht_hat_allergen`.`gericht_id` =  `gericht`.`id`  LEFT join `allergen` a on gericht_hat_allergen.code = a.code
-group by  gericht.name
-limit 5";
+        $sql = "SELECT `gericht`.`name` as gname,`gericht`.`Preis_intern` as preis_intern,`gericht`.`Preis_extern` as preis_extern, 
+                ( a.`name`) as allergene_name,group_concat( a.`code`) as code,
+                 (k.`bildname`) as bildname FROM `gericht`
+                LEFT JoIN `gericht_hat_allergen` on `gericht_hat_allergen`.`gericht_id` =  `gericht`.`id` 
+                LEFT join `allergen` a on gericht_hat_allergen.code = a.code
+                LEFT JOIN gericht_hat_kategorie ghk on gericht.id = ghk.gericht_id 
+                LEFT JOIN kategorie k on k.id = ghk.kategorie_id
+                group by  gericht.name
+                limit 5 ";
+
 
 
         if ($db->query($sql)){
@@ -99,7 +105,7 @@ limit 5";
 
         while ($row =mysqli_fetch_assoc($result)){
             echo'<tr>';
-            echo '<td>', $row['gname'],'</td> <td>', $row['preis_intern'],'&euro;','</td> <td>', $row['preis_extern'],'&euro;','</td> <td>', $row['code'],"<td> <img src='img/Speise2.jpg' alt 'nichts zu zeigen' height ='100' width ='150'> </td>";
+            echo '<td>', $row['gname'],'</td> <td>', $row['preis_intern'],'&euro;','</td> <td>', $row['preis_extern'],'&euro;','</td> <td>', $row['code'],'<td> <img src="img/',$row['bildname'],'" alt = "nichts zu zeigen" height ="100" width ="150"> </td>';
             echo'</tr>';
         }
         echo'</table>';
@@ -181,17 +187,17 @@ limit 5";
                 
                 <div class="col-md-4 mb-3">
                     <label for="validationDefault01">Ihre Name</label>
-                    <input type="text" name = "name" class="form-control" id="validationDefault01" value="Vorname" >
+                    <input type="text" name = "name" class="form-control" id="validationDefault01" placeholder="Vorname" >
 
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="validationDefault02">Ihre Email</label>
-                    <input type="text" name = "email" class="form-control" id="validationDefault02" value="Email">
+                    <input type="text" name = "email" class="form-control" id="validationDefault02" placeholder="Email">
                 </div>
                 <div class="col-md-4 mb-3">
                     Newsletter bitte in:
                     <label>
-                        <select class="form-control form-control-lg" value="sprache">
+                        <select class="form-control form-control-lg" name="sprache">
 
                             <option name="sprachoption" value="Deutsch">Deutsch</option>
                             <option name="sprachoption" value="Spanisch">Spanisch</option>
@@ -212,30 +218,31 @@ limit 5";
 
                 </div>
                 <div class="col-md-4 mb-3">
-                    <button class="btn btn-primary" type="submit" href="#form">Zum Newsletter anmelden</button>
+                    <button class="btn btn-primary" type="submit" href="#form" name="nl-button">Zum Newsletter anmelden</button>
                 </div>
             </div>
 <?php
 
+
 if($_SERVER['REQUEST_METHOD']==='POST') {
     $errors = [];
 }
-if(empty($_POST['name'])){
+if(isset($_POST['name']) && empty($_POST['name'])){
     $errors['name'] = 'Sie müssen Ihre Name schreiben.';
     echo '<div class="alert alert-danger" role="alert">   '.$errors['name'].' </div>';
 
 }
-elseif (empty($_POST['email'])){
+elseif (isset($_POST['email']) && empty($_POST['email'])){
     $errors['email'] = 'Sie müssen Ihre Adresse geben.';
     echo '<div class="alert alert-danger" role="alert">   '.$errors['email'].' </div>';
 }
-elseif (!($_POST['check1'])){
+elseif (!($_POST['check1'])  && isset($_POST['check1'])){
     $errors['check1']= 'Sie mÜssen erst bestädigen';
     echo '<div class="alert alert-danger" role="alert">   '.$errors['check1'].' </div>';
 
 }
 $email = $_POST['email'] ?? NULL;
-if( !filter_var($email, FILTER_VALIDATE_EMAIL) ) {
+if( !filter_var($email, FILTER_VALIDATE_EMAIL) && isset($_POST['email']) ) {
     $errors['email_check'] = '„Ihre E-Mail entspricht nicht den Vorgaben';
     echo '<div class="alert alert-danger" role="alert">   ' . $errors['email_check'] . ' </div>';
 
@@ -252,7 +259,7 @@ echo '<div class="alert alert-success" role="alert" ><strong>Success!</strong> '
     $Speicherung = [
         'name' => $_POST['name'],
         'email' => $_POST['email'],
-        'sprache'=>$_POST['sprachoption']
+
     ];
     $file1 = fopen('Daten.txt', 'a+');
     if (!$file1) {
@@ -262,7 +269,7 @@ echo '<div class="alert alert-success" role="alert" ><strong>Success!</strong> '
 
 
       //Daten in nur einer Zeile gespeichert; Sprrache muss noch ausgewählt werden
-        $line=$Speicherung['name'].";".$Speicherung['email'].";".'Deustch'."aktiv\n";
+        $line=$Speicherung['name'].";".$Speicherung['email'].";".$_POST['sprache'].";"."aktiv\n";
        fwrite($file1, $line);
 
 

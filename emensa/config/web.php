@@ -11,5 +11,11 @@ return array(
     '/dbconnect'   => 'DemoController@dbconnect',
 
     // Erstes Beispiel:
-    '/m4_6a_queryparameter' => 'ExampleController@m4_6a_queryparameter',
+    '/m4_6a_queryparameter' => 'ExamplesController@m4_6a_queryparameter',
+    'm4_6c_gerichte' => 'ExamplesController@m4_6c_gerichte',
+    '/m4_6d_page' => 'ExamplesController@m4_6d_page',
+
+    //route für Ely
+    "/vldemo"      => "HomeController@vldemo",
+    "/praktikum"   => "HomeController@praktikum"
 );
