@@ -1,5 +1,6 @@
 @extends('praktikum.layout.praktikumly')
 @section('title', 'E-Mensa')
+
 @section('content')
     <div id="reception">
 
@@ -20,7 +21,7 @@
             <div id ="speisen">
                 <h2 id = "text2" > Köstlichtkeiten,die Sie erwarten</h2>
             </div>
-            <!-- ////////////////////////////////////////////////////////////////////////////-->
+
 
 
          <table class="table table-bordered" id="table1">
@@ -43,7 +44,13 @@
             <td>{{ $gericht['preis_intern']}}€</td>
             <td>{{ $gericht['preis_extern']}}€</td>
             <td>{{ $gericht['code']}}
-            <td> <img src="img/{{$gericht['bildname']}}" alt = "nichts zu zeigen" height ="100" width ="150"> </td>
+            <td> <img src="img/gerichte/{{$gericht['bildname']}}" alt = "nichts zu zeigen" height ="100" width ="150"> </td>
         </tr>
     @endforeach
+            </tbody>
+         </table>
+        </div>
+
+
+
 @endsection

@@ -1,3 +1,4 @@
+@section('footer')
 <footer id="foot">
     <div id ="foot1">
         <div id="foot2">
@@ -13,3 +14,4 @@
         </div>
 </div>
 </footer>
+@endsection

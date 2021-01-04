@@ -1,4 +1,6 @@
-<body id="ganz">
+@section('navigation')
+
+<header id="ganz">
 <div id="beginn">
     <div id="logo">
         E-Mensa Logo
@@ -25,3 +27,5 @@
     </div>
 
 </div>
+</header>
+@endsection
