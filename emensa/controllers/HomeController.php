@@ -1,5 +1,6 @@
 <?php
 require_once('../models/gericht.php');
+require_once ('../models/login.php');
 
 /* Datei: controllers/HomeController.php */
 class HomeController
@@ -23,14 +24,39 @@ class HomeController
 
     public function praktikum(RequestData $rd)
     {
+
+        session_start();
+        if (!isset($_SESSION['cnt'])) {
+            $_SESSION['cnt'] = 0;
+        } else {
+            $_SESSION['cnt']++;
+        }
+        echo $_SESSION['cnt'];
+        $data1 = db_benutzer();
+        echo $data1;
+
         $data = db_select_gerichte();
+
         return view('Praktikum.praktikum', [
-            'data' => $data
+            'data' => $data,
+            'data1' => $data1
         ]);
+
     }
 
 
+////////////5
 
-
+    public function anmeldung(RequestData $rd) {
+        $msg = $_SESSION['login_result_message'] ?? null;
+        return view('Praktikum.anmeldung', ['msg' => $msg]);
+    }
+    public function abmeldung(RequestData $rd)
+    {
+        unset($_SESSION['email']);
+        unset($_SESSION['passwort']);
+        header('location: praktikum');
+        exit;
+    }
 
 }

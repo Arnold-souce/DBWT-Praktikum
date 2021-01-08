@@ -17,5 +17,11 @@ return array(
 
     //route für Ely
     "/vldemo"      => "HomeController@vldemo",
-    "/praktikum"   => "HomeController@praktikum"
+    "/praktikum"   => "HomeController@praktikum",
+
+
+    //5
+    "/anmeldung"   => "HomeController@anmeldung",
+    "/abmeldung"   => "HomeController@abmeldung",
+    "/vlsessiondemo" => "DemoController@vlsessiondemo"
 );
